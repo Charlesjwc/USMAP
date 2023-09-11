@@ -1728,7 +1728,7 @@ public final class StdDraw implements ActionListener, MouseListener, MouseMotion
 			while (newReader.hasNextLine()) {
 				String data = newReader.nextLine();
 				String Name = data.substring(data.indexOf(" ")+1, data.indexOf(",")-1);
-				String population = data.substring(data.indexOf(",")+5, data.length()-1);
+				String population = data.substring(data.indexOf(",")+5, data.length());
 				bigCityName.add(Name);
 				bigCityPop.add(population);
 				StdDraw.setPenColor(StdDraw.GRAY);
@@ -1752,17 +1752,20 @@ public final class StdDraw implements ActionListener, MouseListener, MouseMotion
 				String Name2 = data.substring(data.indexOf(" ")+1, data.indexOf(","));
 				String Name = Name2.substring(Name2.indexOf(" ")+1, Name2.length()-1);
 				StdDraw.setPenColor(StdDraw.GRAY);
-				StdDraw.circle(Double.parseDouble(coord2),Double.parseDouble(coord1), 0.006);
+				StdDraw.setPenRadius(0.006);
+				StdDraw.point(Double.parseDouble(coord2),Double.parseDouble(coord1));
 				for (int i = 0; i < bigCityName.size()-1; i++) {
 					if (Name.equals(bigCityName.get(i))) {
 						if (i < 10) {
 							StdDraw.setPenColor(StdDraw.RED);
+							//StdDraw.text(100, 30 + i/3, bigCityPop.get(i));
 						} else {
 						StdDraw.setPenColor(StdDraw.BLUE);
 						}
 						double population = Double.parseDouble(bigCityPop.get(i));
+						StdDraw.setPenRadius(0.6 * (Math.sqrt(population)/18500));
 						//StdDraw.text(100, 22+i, bigCityPop.get(i));
-						StdDraw.filledCircle(Double.parseDouble(coord2),Double.parseDouble(coord1), 0.6 * (Math.sqrt(population)/18500));
+						StdDraw.point(Double.parseDouble(coord2),Double.parseDouble(coord1));
 						//StdDraw.filledCircle(Double.parseDouble(coord2),Double.parseDouble(coord1), 1);
 					}
 					//StdDraw.setPenColor(StdDraw.BOOK_LIGHT_BLUE);
